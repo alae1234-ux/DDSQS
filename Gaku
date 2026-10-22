@@ -1,0 +1,23 @@
+local HttpService = game:GetService("HttpService")
+
+local WEBHOOK_URL = "YOUR_DISCORD_WEBHOOK_URL"
+
+local function sendHello()
+    local payload = {
+        content = "hello"
+    }
+
+    local success, err = pcall(function()
+        HttpService:PostAsync(
+            WEBHOOK_URL,
+            HttpService:JSONEncode(payload),
+            Enum.HttpContentType.ApplicationJson
+        )
+    end)
+
+    if not success then
+        warn("Webhook request failed:", err)
+    end
+end
+
+sendHello()
